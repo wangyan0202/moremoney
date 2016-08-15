@@ -1,0 +1,98 @@
+8.8号出现很多无效的支付单号,我今天没碰支付代码.
+杨总应该也没改代码,但是连连应该是访问了我们的回调函数,可是连连的充值表格里面又少了很多单号,好像是连连出现问题,
+
+money_log_sum代表资金变动记录表中的金额总和,deal_money_sum代表在投资产总额,筛选出了差值大于10元的用户
+
+
+
+
+
+deal_id=797,deal_name=多米赚 No.Z0001
+user_id=30687,money_log_sum=-2.00,deal_money_sum=300.00
+user_id=31389,money_log_sum=-3.00,deal_money_sum=300.00
+user_id=30314,money_log_sum=299.01,deal_money_sum=600.00
+user_id=32085,money_log_sum=-2.99,deal_money_sum=13000.00    充值5000,在投5000,发出提现请求,连连没有此提现单号
+user_id=11570,money_log_sum=32030.41,deal_money_sum=66073.00   重复购买 已处理
+user_id=33431,money_log_sum=4198.00,deal_money_sum=12800.00  正常
+user_id=1877,money_log_sum=5606.14,deal_money_sum=5671.00
+
+deal_id=799,deal_name=多米月 No.M0001
+user_id=33170,money_log_sum=298.01,deal_money_sum=901.00
+user_id=33455,money_log_sum=-2.00,deal_money_sum=300.00
+user_id=26715,money_log_sum=-1.00,deal_money_sum=400.00
+user_id=33562,money_log_sum=298.00,deal_money_sum=800.00
+user_id=34000,money_log_money=0.01,payment_notice_money=301.01
+user_id=34027,money_log_money=,payment_notice_money=299.01
+user_id=34188,money_log_money=,payment_notice_money=299.01
+user_id=34200,money_log_money=,payment_notice_money=299.01
+user_id=27274,money_log_sum=199.72,deal_money_sum=300.00 正常
+user_id=35634,money_log_sum=1585.01,deal_money_sum=1600.00 正常
+user_id=33800,money_log_money=10.01,payment_notice_money=309.00  正常
+user_id=34079,money_log_money=,payment_notice_money=999.01 
+user_id=46145,money_log_sum=8150.01,deal_money_sum=8300.00 正常
+
+user_id=27649,money_log_money=6.05,payment_notice_money=11.05  正常
+
+deal_id=802,deal_name=多米年 No.Y0001
+user_id=33431,money_log_sum=4198.00,deal_money_sum=12800.00  正常
+user_id=27637,money_log_sum=0.01,deal_money_sum=50000.00 正常
+user_id=33728,money_log_sum=-4.00,deal_money_sum=200.00  处理
+user_id=4049,money_log_sum=-658.50,deal_money_sum=500.00  正常
+user_id=27649,money_log_money=6.05,payment_notice_money=11.05 正常
+user_id=34135,money_log_money=,payment_notice_money=597.01 正常
+user_id=34170,money_log_money=,payment_notice_money=893.02  正常
+
+deal_id=803,deal_name=多米季 No.S0001
+user_id=29884,money_log_sum=-1.00,deal_money_sum=200.00  正常
+user_id=33462,money_log_sum=299.01,deal_money_sum=902.00  处理
+user_id=33431,money_log_sum=4198.00,deal_money_sum=12800.00 正常
+user_id=27649,money_log_money=6.05,payment_notice_money=11.05 正常
+user_id=34170,money_log_money=,payment_notice_money=893.02 正常
+user_id=34154,money_log_money=,payment_notice_money=299.01 正常
+
+
+deal_id=804,deal_name=多米年 No.Y0002
+user_id=1973,money_log_money=37269.36,payment_notice_money=80418.36  正常
+user_id=14866,money_log_sum=1758.47,deal_money_sum=7195.00  正常
+user_id=4150,money_log_sum=2970.00,deal_money_sum=3000.00 正常
+user_id=13416,money_log_sum=27618.85,deal_money_sum=32251.00  正常
+
+deal_id=807,deal_name=多米月 No.M0002
+
+user_id=6485,money_log_sum=2750.48,deal_money_sum=2800.00 正常
+user_id=1973,money_log_money=37269.36,payment_notice_money=80418.36 正常
+
+deal_id=808,deal_name=多米年 No.Y0004
+user_id=14343,money_log_sum=7900.00,deal_money_sum=8000.00 正常
+user_id=45937,money_log_sum=1970.00,deal_money_sum=2000.00 正常
+user_id=268,money_log_sum=2780.00,deal_money_sum=2800.00 正常
+user_id=13416,money_log_sum=27618.85,deal_money_sum=32251.00 正常
+user_id=3020,money_log_sum=431.74,deal_money_sum=1500.00  正常
+user_id=1877,money_log_sum=5606.14,deal_money_sum=5671.00 正常
+
+deal_id=809,deal_name=多米月 No.M0003
+user_id=236,money_log_sum=1950.00,deal_money_sum=2000.00 正常
+user_id=35634,money_log_sum=1585.01,deal_money_sum=1600.00 正常
+user_id=268,money_log_sum=2780.00,deal_money_sum=2800.00 正常
+user_id=27649,money_log_money=6.05,payment_notice_money=11.05
+user_id=46021,money_log_sum=1865.00,deal_money_sum=1900.00 正常
+user_id=14389,money_log_sum=-508.44,deal_money_sum=500.00  正常
+
+user_id=1397,money_log_sum=885.00,deal_money_sum=900.00  正常
+user_id=46145,money_log_sum=8150.01,deal_money_sum=8300.00 正常
+user_id=7477,money_log_sum=9900.00,deal_money_sum=10100.00 正常
+user_id=544,money_log_sum=10099.56,deal_money_sum=10300.00  正常
+user_id=4228,money_log_sum=8850.00,deal_money_sum=9000.00 正常
+
+
+deal_id=810,deal_name=多米月 No.M0004
+
+user_id=2421,money_log_sum=1865.00,deal_money_sum=1900.00 正常
+user_id=5186,money_log_sum=-10085.00,deal_money_sum=10000.00 正常   
+user_id=12393,money_log_sum=1470.00,deal_money_sum=1500.00 正常
+user_id=17040,money_log_sum=1959.71,deal_money_sum=2000.00  正常
+user_id=575,money_log_sum=-7441.24,deal_money_sum=500.00 正常
+user_id=268,money_log_sum=2780.00,deal_money_sum=2800.00  正常
+
+
+

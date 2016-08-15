@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title></title>
+
+
+    <link rel="shortcut icon" href="__PUBLIC__/favicon.ico">
+    <link href="__PUBLIC__/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <link href="__PUBLIC__/css/animate.css" rel="stylesheet">
+    <link href="__PUBLIC__/css/style.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>自定义菜单设置</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">公众号管理</a>
+            </li>
+            <li>
+                <strong>自定义菜单设置</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-sm-8">
+        <div class="title-action">
+            <a href="" class="btn btn-primary">刷新</a>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox-content">
+                <div class="table-responsive">
+                    <button class="btn btn-primary btn-sm menuAdd">添加一级菜单</button>
+                    <table class="table table-striped" id="menu">
+                        <!--表格形式-->
+
+                        <thead>
+                        <tr>
+                            <td>操作</td>
+                            <td>菜单类型</td>
+                            <td>点击动作类型</td>
+                            <td>名字</td>
+                            <td>关键字(英文数字下划线)</td>
+                        </tr>
+
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+
+                                <button class="btn btn-info btn-sm subMenuAdd">添加二级菜单</button>
+                            </td>
+                            <td>
+                                一级菜单
+                            </td>
+                            <td>
+                                <select class="type">
+                                    <option value="click">点击</option>
+                                    <option value="view">跳转链接</option>
+                                    <option value="scancode_push">扫码推事件</option>
+                                    <option value="scancode_waitmsg">扫码带提示</option>
+                                    <option value="pic_sysphoto">弹出系统照相机拍照发图</option>
+                                    <option value="pic_photo_or_album">弹出拍照或者相册</option>
+                                    <option value="pic_weixin">弹出微信相册</option>
+                                    <option value="location_select">弹出地理位置选择器</option>
+                                    <option value="media_id">下发消息</option>
+                                    <option value="view_limited">跳转图文消息URL</option>
+                                    <option value="menu">当此菜单下有二级菜单时,选择此项</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input id="name" placeholder="测试一级菜单">
+                            </td>
+                            <td>
+                                <input id="key" placeholder="testMenu">
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                    <button class="btn btn-warning pull-right">保存菜单</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 全局js -->
+<script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+<script src="__PUBLIC__/js/bootstrap.min.js?v=3.3.6"></script>
+
+<!-- 自定义js -->
+<script src="__PUBLIC__/js/content.js?v=1.0.0"></script>
+
+<script>
+    //添加一级菜单被点击
+    $(".menuAdd").on('click',function () {
+        //添加一个新的tr
+        $("#menu").append('<tr><td><button class="btn btn-info btn-sm subMenuAdd">添加二级菜单</button></td><td>一级菜单</td><td><select><option value="click">点击</option><option value="view">跳转链接</option><option value="scancode_push">扫码推事件</option><option value="scancode_waitmsg">扫码带提示</option><option value="pic_sysphoto">弹出系统照相机拍照发图</option><option value="pic_photo_or_album">弹出拍照或者相册</option><option value="pic_weixin">弹出微信相册</option><option value="location_select">弹出地理位置选择器</option><option value="media_id">下发消息</option><option value="view_limited">跳转图文消息URL</option><option value="menu">当此菜单下有二级菜单时,选择此项</option></select></td><td><input id="name" placeholder="测试一级菜单"></td><td><input id="key" placeholder="testMenu"></td></tr>');
+    });
+
+
+    $(document).on('click','.subMenuAdd',function () {
+        //在此处添加二级菜单
+
+        $(this).parent().parent().after('<tr><td></td><td>二级菜单</td><td><select><option value="click">点击</option><option value="view">跳转链接</option><option value="scancode_push">扫码推事件</option><option value="scancode_waitmsg">扫码带提示</option><option value="pic_sysphoto">弹出系统照相机拍照发图</option><option value="pic_photo_or_album">弹出拍照或者相册</option><option value="pic_weixin">弹出微信相册</option><option value="location_select">弹出地理位置选择器</option><option value="media_id">下发消息</option><option value="view_limited">跳转图文消息URL</option><option value="menu">当此菜单下有二级菜单时,选择此项</option></select></td><td><input id="name" placeholder="测试一级菜单"></td><td><input id="key" placeholder="testMenu"></td></tr>');
+        //这个菜单本身类型设置为
+        $(this).parent().next().next().html('<td>无类型</td>');
+        $(this).parent().next().next().next().next().html('<td>无关键字</td>');
+
+    });
+
+
+</script>
+</body>
+
+</html>

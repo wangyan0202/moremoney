@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title></title>
+
+
+    <link rel="shortcut icon" href="__PUBLIC__/favicon.ico">
+    <link href="__PUBLIC__/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <link href="__PUBLIC__/css/animate.css" rel="stylesheet">
+    <link href="__PUBLIC__/css/style.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>平台已注册用户管理</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="userView">用户管理</a>
+            </li>
+            <li>
+                <strong>用户查询</strong>
+            </li>
+            <li>{$noResult}
+            </li>
+            <li><a href="" class="btn btn-info">刷新</a></li>
+        </ol>
+    </div>
+
+</div>
+
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-4">
+            <div id="search">
+                <form method="post" action="{:U('userSearch')}">
+                    <div class="form-group">
+
+                        <div class="input-group">
+
+
+                            <select class="form-control" style="font-size:16px" name="search_type">
+
+                                <option value="0">普通用户</option>
+                                <option value="1">普通代理</option>
+                                <option value="2">全国代理</option>
+                                <option value="3">区域独家代理</option>
+                                <option selected value="">不设置类型</option>
+
+
+                            </select>
+
+                        </div>
+
+
+                    </div>
+                    <div class="form-group">
+
+                        <div class="input-group">
+
+
+                            <input type="text" class="form-control" name="search_param" placeholder="请输入帐号,名字,手机号,或者邮箱~"
+                                   autocomplete="off"/>
+	   <span class="input-group-btn"> <button type="submit" class="btn btn-success">搜索用户
+                                        </button> </span>
+
+                        </div>
+
+
+                    </div>
+
+
+                </form>
+
+            </div>
+
+
+        </div>
+        <div class="col-sm-4">
+
+        </div>
+
+        <div class="col-sm-4">
+
+        </div>
+    </div>
+
+    <div class="ibox-content">
+        <div class="table-responsive">
+            <table class="table table-striped" id="pingList">
+                <label>{$netbarNow}</label>
+                <thead>
+                <tr>
+                    <th>
+                        序号
+                    </th>
+                    <th>
+                        账号
+                    </th>
+                    <th>
+                        联系人
+                    </th>
+                    <th>
+                        手机
+                    </th>
+                    <th>
+                        QQ
+                    </th>
+                    <th>
+                        邮箱
+                    </th>
+                    <th>
+                        注册时间
+                    </th>
+                    <th>VIP点数</th>
+                    <th>用户类型</th>
+                    <th>代理商名字</th>
+                    <th>代理区域</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <!--使用volist渲染 -->
+                <tbody>
+                <volist name="result" id="vo">
+                    <tr>
+                        <td>
+                            {$vo.user_id}
+                        </td>
+                        <td>
+                            {$vo.user_user}
+                        </td>
+                        <td>
+                            {$vo.user_name}
+                        </td>
+                        <td>
+                            {$vo.user_phone}
+                        </td>
+
+                        <td>
+                            {$vo.user_qq}
+                        </td>
+                        <td>
+                            {$vo.user_mail}
+                        </td>
+                        <td>
+                            {$vo.user_reg_time}
+                        </td>
+                        <td>{$vo.user_vip_time}</td>
+                        <td>
+                            <switch name="vo.user_type">
+                                <case value="0">普通用户</case>
+                                <case value="1">普通代理</case>
+                                <case value="2">全国代理</case>
+                                <case value="3">独家代理</case>
+
+
+                            </switch>
+                        </td>
+                        <td>{$vo.user_agent_name}</td>
+                        <td>{$vo.user_area_province}{$vo.user_area_city}{$vo.user_area_dist}</td>
+                        <td>
+                            <a class="btn btn-success" href="{:U('userEditView')}&user_id={$vo.user_id}">编辑</a>
+                            <a id="{$vo.user_id}" class="btn btn-danger">改变VIP点数</a>
+                        </td>
+                    </tr>
+                </volist>
+                </tbody>
+            </table>
+        </div>
+        <div class="Pagination">{$page}</div>
+    </div>
+</div>
+
+
+
+<!-- 全局js -->
+<script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+<script src="__PUBLIC__/js/bootstrap.min.js?v=3.3.6"></script>
+
+<!-- 自定义js -->
+<script src="__PUBLIC__/js/content.js?v=1.0.0"></script>
+<script src="__PUBLIC__//js/plugins/layer/layer.min.js"></script>
+<script>
+
+    <volist name = "result" id = "vo" >
+            $("#{$vo.user_id}").on('click', function () {
+                layer.open({
+                    type: 1,
+                    area: ['400px', '250px'],
+                    shadeClose: true,
+                    content: '<div id="confirm"><h3 style="text-align: center;">请设置类型和数量</h3> <form role="form" method="post" action="{:U('VIPNumChange')}"> <input style="display:none" name="user_id"value={$vo.user_id}> <div class="form-group"> <label class="col-sm-2 control-label">数量</label> <input name="num" type="text" placeholder="" class="form-control"value=""> <label class="col-sm-2 control-label">类型</label> <select class="form-control m-b" name="type"> <option selected value="1">增加点数</option> <option value="2">减少点数</option> </select></div> <button class="btn btn-sm btn-success pull-right m-t-n-xs" type="submit"><strong>确认修改 </strong></button> </form> </div>'
+                });
+            });
+    </volist >
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title></title>
+
+
+    <link rel="shortcut icon" href="__PUBLIC__/favicon.ico">
+    <link href="__PUBLIC__/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <link href="__PUBLIC__/css/animate.css" rel="stylesheet">
+    <link href="__PUBLIC__/css/style.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>关键词回复管理</h2>
+        <ol class="breadcrumb">
+            <li>
+                公众号管理
+            </li>
+            <li>
+                <strong>关键词回复管理</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-sm-8">
+        <div class="title-action">
+            <button class="btn btn-warning keyWordAdd">添加新关键词回复</button>
+            <a href="" class="btn btn-primary">刷新</a>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox-content">
+                <div class="table-responsive">
+                    <table class="table table-striped" id="keyWord">
+                        <thead>
+                        <tr>
+                            <th>
+                                ID
+                            </th>
+                            <th>
+                                关键词
+                            </th>
+                            <th>
+                                自动回复内容
+                            </th>
+                            <th>
+                                操作
+                            </th>
+                        </tr>
+                        </thead>
+                        <!--使用volist渲染 -->
+                        <tbody>
+                        <volist name="result" id="vo">
+                            <tr>
+                                <td>
+                                    {$vo.msg_id}
+                                </td>
+                                <td>
+                                    <input type="text" id="msg_key" value="{$vo.msg_key}">
+                                </td>
+                                <td>
+                                    <input type="text" id="msg_text" value="{$vo.msg_text}">
+                                </td>
+                                <td>
+                                    <a class="btn btn-success update">更新</a>
+                                    <a id="{$vo.msg_id}" class="btn btn-danger delete">删除</a>
+                                </td>
+                            </tr>
+                        </volist>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="Pagination">{$page}</div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 全局js -->
+<script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+<script src="__PUBLIC__/js/bootstrap.min.js?v=3.3.6"></script>
+
+<!-- 自定义js -->
+<script src="__PUBLIC__/js/content.js?v=1.0.0"></script>
+<script>
+    //更新关键词回复,发送一个ajax请求
+    $(document).on('click','.update',function () {
+        var msg_id=$(this).parent().prev().prev().prev().html();
+        var msg_key=$(this).parent().prev().prev().children().val();
+        var msg_text=$(this).parent().prev().children().val();
+        //构建ajax
+        $.ajax({
+            type:"POST",
+            url:"{:U('keyWordUpdate')}",
+            data:"msg_id="+msg_id+"&msg_key="+msg_key+"&msg_text="+msg_text,
+            async:false,
+            success:function(data){
+                json=$.parseJSON(data);
+                status=json.status;
+                msg=json.msg;
+                alert(msg);
+            }
+        });
+    });
+    //删除关键词回复,发送一个ajax请求
+    $(document).on('click','.delete',function () {
+        var msg_id=$(this).parent().prev().prev().prev().html();
+        $.ajax({
+            type:"POST",
+            url:"{:U('keyWordDelete')}",
+            data:"msg_id="+msg_id,
+            async:false,
+            success:function(data){
+                json=$.parseJSON(data);
+                status=json.status;
+                msg=json.msg;
+                alert(msg);
+            }
+        });
+    });
+    //添加新的关键词回复,ajax
+    $(document).on('click','.keyWordAdd',function(){
+        $('#keyWord').append('<tr><td></td><td><input type="text" id="msg_key" value=""></td><td><input type="text" id="msg_text" value=""></td><td><a class="btn btn-success add">添加</a> <a class="btn btn-danger delete">删除</a></td></tr>')
+    });
+    $(document).on('click','.add',function(){
+        var msg_key=$(this).parent().prev().prev().children().val();
+        var msg_text=$(this).parent().prev().children().val();
+        //构建ajax
+        $.ajax({
+            type:"POST",
+            url:"{:U('keyWordAdd')}",
+            data:"msg_key="+msg_key+"&msg_text="+msg_text,
+            async:false,
+            success:function(data){
+                json=$.parseJSON(data);
+                status=json.status;
+                msg=json.msg;
+                alert(msg);
+            }
+        });
+    });
+</script>
+
+</body>
+
+</html>

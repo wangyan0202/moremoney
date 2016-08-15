@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title></title>
+
+
+    <link rel="shortcut icon" href="__PUBLIC__/favicon.ico">
+    <link href="__PUBLIC__/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <link href="__PUBLIC__/css/animate.css" rel="stylesheet">
+    <link href="__PUBLIC__/css/style.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>平台奖品管理</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="prizeView">奖品管理</a>
+            </li>
+            <li>
+                <strong>奖品查询</strong>
+            </li>
+            <li>{$noResult}
+            </li>
+            <li><a href="" class="btn btn-success btn-sm">刷新</a></li>
+        </ol>
+    </div>
+
+</div>
+
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-4">
+            <div id="search">
+                <form method="post" action="prizeSearch">
+
+                    <div class="form-group">
+
+                        <div class="input-group">
+
+
+                            <select class="form-control" style="font-size:16px" name="search_type">
+
+                                <option value="Q币">Q币</option>
+                                <option value="网费">网费</option>
+                                <option value="饮料">饮料</option>
+                                <option value="食品">食品</option>
+                                <option value="话费">话费</option>
+                                <option value="点卡">点卡</option>
+                                <option value="其他">其他</option>
+                                <option selected value="">不设置类型</option>
+
+
+                            </select>
+
+                        </div>
+
+
+                    </div>
+                    <div class="form-group">
+
+                        <div class="input-group">
+
+
+                            <input type="text" class="form-control" name="search_param" placeholder="请输入奖品名关键字~"
+                                   autocomplete="off"/>
+	   <span class="input-group-btn"> <button type="submit" class="btn btn-success">搜索奖品
+                                        </button> </span>
+
+                        </div>
+
+
+                    </div>
+
+
+                </form>
+
+            </div>
+
+
+        </div>
+        <div class="col-sm-4">
+
+        </div>
+
+        <div class="col-sm-4">
+
+        </div>
+    </div>
+
+    <div class="ibox-content">
+        <div class="table-responsive">
+            <table class="table table-striped" id="pingList">
+
+                <thead>
+                <tr>
+                    <th>
+                       名称
+                    </th>
+                    <th>
+                        分类
+                    </th>
+                    <th>
+                        价格
+                    </th>
+                    <th>
+                        所需金币
+                    </th>
+                    <!--<th>
+                        图片
+                    </th>-->
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <!--使用volist渲染 -->
+                <tbody>
+                <volist name="result" id="vo">
+                    <tr>
+                        <td>
+                            {$vo.prize_name}
+                        </td>
+                        <td>
+                            {$vo.prize_class}
+                        </td>
+                        <td>
+                            {$vo.prize_price}
+                        </td>
+                        <td>
+                            {$vo.prize_exchange_gold}
+                        </td>
+                        <!--<td>
+                            {$vo.prize_pic}
+                        </td>-->
+                        <td>
+                            <a class="btn btn-success" href="{:U('prizeEditView')}&prize_id={$vo.prize_id}">编辑</a>
+                            <a id="{$vo.prize_id}" class="btn btn-danger">删除</a>
+                        </td>
+                    </tr>
+                </volist>
+                </tbody>
+            </table>
+        </div>
+        <div class="Pagination">{$page}</div>
+    </div>
+</div>
+<!-- 全局js -->
+<script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+<script src="__PUBLIC__/js/bootstrap.min.js?v=3.3.6"></script>
+
+<!-- 自定义js -->
+<script src="__PUBLIC__/js/content.js?v=1.0.0"></script>
+<script src="__PUBLIC__//js/plugins/layer/layer.min.js"></script>
+<script>
+
+    <volist name="result" id="vo">
+            $("#{$vo.prize_id}").on('click',function(){
+                layer.open({
+                    type:1,
+                    area:['300px','150px'],
+                    shadeClose:true,
+                    content:'<div style="padding:20px;"><h3>您确定要删除这个奖品吗?</h1><a href="{:U('prizeDelete')}&id={$vo.prize_id}"class="btn btn-primary pull-right">确认删除</a></div>'
+                });
+            });
+    </volist>
+
+</script>
+</body>
+
+</html>

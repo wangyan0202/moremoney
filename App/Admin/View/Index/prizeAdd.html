@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title></title>
+
+
+    <link rel="shortcut icon" href="__PUBLIC__/favicon.ico">
+    <link href="__PUBLIC__/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <link href="__PUBLIC__/css/animate.css" rel="stylesheet">
+    <link href="__PUBLIC__/css/style.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>平台奖品设置</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="prizeView">奖品管理</a>
+            </li>
+            <li>
+                <strong>奖品编辑</strong>
+            </li>
+            <li>{$noResult}
+            <li><a href="" class="btn btn-sm btn-success">刷新</a></li>
+            </li>
+        </ol>
+    </div>
+    <div class="col-sm-8">
+        <div class="title-action">
+
+        </div>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content">
+    <div class="ibox-content">
+        <div class="row">
+            <div class="col-sm-1">
+            </div>
+            <div class="col-sm-5">
+
+
+
+                    <form role="form" method="post" action="{:U('prizeEdit')}&type=add">
+                        <input style="display:none" name="prize_id" value={$vo.prize_id}></input>
+                        <div class="form-group">
+                            <label>
+                                奖品名:
+                            </label>
+                            <input name="prize_name" placeholder="" class="form-control"
+                                   value="{$vo.prize_name}">
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                所需金币:
+                            </label>
+                            <input name="prize_exchange_gold" type="" placeholder="" class="form-control" value="{$vo.prize_exchange_gold}">
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                价格:
+                            </label>
+                            <input name="prize_price" type="" placeholder="" class="form-control" value="{$vo.prize_price}">
+                        </div>
+                        <div>
+                            <div class="form-group">
+                                <label>
+                                    奖品图片:
+                                </label>
+                                <input id="pic" name="prize_pic" type="" placeholder="" class="form-control"
+                                       value="{$vo.prize_pic}">
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    奖品分类:{$vo.prize_class}
+
+                                </label>
+                                <div>
+                                    <select style="font-size:16px;width:200px;height:35px"name="prize_class">
+                                        <option selected value="{$vo.prize_class}">不改变分类</option>
+                                        <option value="Q币">Q币</option>
+                                        <option value="网费">网费</option>
+                                        <option value="饮料">饮料</option>
+                                        <option value="食品">食品</option>
+                                        <option value="话费">话费</option>
+                                        <option value="点卡">点卡</option>
+                                        <option value="其他">其他</option>
+
+
+
+                                    </select>
+                                </div>
+
+
+                            </div>
+
+                            <button class="btn btn-sm btn-success pull-right m-t-n-xs" type="submit">
+                                <strong>
+                                    确认添加
+                                </strong>
+                            </button>
+                        </div>
+                    </form>
+
+            </div>
+            <div class="col-sm-6">
+                <form action="" enctype="multipart/form-data" method="post">
+                    上传奖品图片<br/>
+                    <input type="file" name="file" id="jsup">
+                </form>
+                <div>
+                    <img id="imgShow" height="400px" width="400px" src="{$vo.prize_pic}">
+
+                </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- 全局js -->
+<script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+<script src="__PUBLIC__/js/bootstrap.min.js?v=3.3.6"></script>
+<link href="__PUBLIC__/uploadify/uploadify.css" rel="stylesheet">
+
+<script type="text/javascript" src="__PUBLIC__/uploadify/jquery.uploadify.min.js"></script>
+
+<!-- 自定义js -->
+<script src="__PUBLIC__/js/content.js?v=1.0.0"></script>
+
+
+<script type="text/javascript">
+    $(function() {
+        $('#jsup').uploadify({
+            //固定配置项
+            'swf'				: '__PUBLIC__/uploadify/uploadify.swf',    //指定上传控件的主体文件
+            'uploader'			: "{:U('Home/Admin/PrizePicUpload')}",  //指定服务器端上传处理文件
+            'fileObjName'     	: 'file',
+            'buttonImage'		: '__PUBLIC__/uploadify/uploadify-upload.png', //上传处理文件按钮背景图片
+            'width'				: 108,
+            'height'			: 28,
+            //'buttonClass'		: 'class', //上传class
+            //'buttonText'      	: '上传文件',
+            //其他配置项
+            'fileSizeLimit'		: '0',	//上传文件限制 0问无限制
+            'fileTypeDesc'		: 'Image Files', //文件类型
+            'fileTypeExts'		: '*.jpg',	//文件后缀
+            'onUploadSuccess' 	: uploadSuccess,
+            'onUploadError'		: onUploadError,
+            'onFallback' 		: function() {
+                alert('未检测到兼容版本的Flash.');
+            }
+        });
+        function uploadSuccess(file,data){
+            console.log(data);
+            var data = JSON.parse(data);
+            console.log(data);
+            // var key = data['savepath']+data['savename'];
+            // console.log(data);
+            // console.log(data['savepath']);
+            // console.log(data['savename']);
+            // console.log(data['ext']);
+            // console.log(data['size']);
+            // content = $('#imgshow').html();
+            // content = content + '<img src="<?php echo OSS ?>'+ key+'">';
+            // $('#imgshow').html(content);
+
+
+            $('#pic').val(data['url']);
+            $("#imgShow").attr("src",data["url"]);
+
+
+
+        }
+        function onUploadError(file,data){
+            console.log(data);
+            var data = JSON.parse(data);
+            console.log(data);
+        }
+    });
+</script>
+
+</body>
+
+</html>
