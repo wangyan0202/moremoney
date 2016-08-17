@@ -234,6 +234,48 @@ class DataAnalysisController extends Controller
         //var_dump($array);
         //echo $str_data;
         return $str_data;
+    }
+
+
+    public function createData1( $date = '', $type = 1)
+    {
+        $BeginDate = $date . " 00:00:00";
+        $BeginTime=strtotime($BeginDate);
+
+        if ($type == 1) {
+            //取那一整天
+            $EndTime = date('Y-m-d 00:00:00', strtotime("+1 day", strtotime($BeginTime)));
+        } else {
+            //参数的日期到现在
+            $EndTime = date('Y-m-d', time());
+        }
+        $spread = M('spread');
+        $db = M();
+
+        //自然新增用户(总的用户-万普-有米-点乐)
+        //总的新增用户
+        $sql="SELECT count(*) from yjsdata_user where create_time>='$BeginTime'";
+        $NewAddUser=$db->query($sql);
+        //
+        //推广商的新增用户
+        $sql="select 'data' from yjsdata_spread_data where data_begin_time>='".$BeginDate."' and  data_end_time<='".$EndTime."'";
+        $jsonData=$db->query($sql);
+        $arrData=json_decode($jsonData,true);
+        //var_dump($arrData);
+        //exit;
+        $arrBeginTime=$arrData['统计开始时间'];
+        $arrEndTime=$arrData['统计结束时间'];
+        //推广方的注册用户
+        $spreadName=$arrData['推广方'];
+        $spreadRegistrations=$arrData['总注册量'];
+
+
+        //当天的新曾投资总额
+        $sql="SELECT sum(money) FROM yjsdata_deal_load WHERE create_time>='".$BeginTime."' and create_time<='".$EndTime."'";
+        $newAddMoney=$db->query($sql);
+        
+
+
 
 
 
